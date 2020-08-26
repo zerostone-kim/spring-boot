@@ -2,24 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id "org.asciidoctor.convert" version "1.5.9.2" // rest doc 사용 (1) 
-	
 }
 
 group = 'io.honeymon.tacademy'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
-asciidoctor {
-    dependsOn test //  rest doc 사용 (2)
-}
-
-bootJar {
-    dependsOn asciidoctor // rest doc 사용 (3)
-    from ("${asciidoctor.outputDir}/html5") { // rest doc 사용 (4)
-        into 'static/docs'
-    }
-}
 
 configurations {
 	compileOnly {
@@ -40,7 +27,6 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc') // rest doc 사용 (5)
 	testCompileOnly 'junit:junit'
 	
 	//annotationProcessor('org.junit.Test')
